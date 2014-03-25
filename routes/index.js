@@ -34,7 +34,7 @@ module.exports = function (app, nconf, io) {
   });
 
   app.post('/channel', function (req, res, next) {
-    diphenhydramine.getChats(req.body.channel, true, function (err, c) {
+    diphenhydramine.getChats(req.body.channel.toString().slice(0, 80), true, function (err, c) {
       if (err) {
         res.status(400);
         res.render('400');
@@ -72,7 +72,7 @@ module.exports = function (app, nconf, io) {
   });
 
   var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
-    diphenhydramine.addChat(message.slice(0, 250), channel, {
+    diphenhydramine.addChat(message.slice(0, 100), channel, {
       ttl: 600000,
       media: picture,
       fingerprint: userId
