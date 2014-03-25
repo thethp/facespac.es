@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1",
+  "name": "facespaces",
+  "description": "A highly addictive selfie app",
+  "orientation": "portrait",
+  "launch_path": "/",
+  "icons": {
+    "32": "/images/favicon.png",
+    "72": "/images/logo-72.png",
+    "114": "/images/logo-114.png",
+    "128": "/images/logo-128.png",
+    "256": "/images/logo-256.png"
+  },
+  "developer": {
+    "name": "Edna Piranha",
+    "url": "http://ednapiranha.com"
+  },
+  "installs_allowed_from": ["https://marketplace.firefox.com"],
+  "locales": {
+  },
+  "default_locale": "en"
+}

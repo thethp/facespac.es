@@ -1,0 +1,26 @@
+extend layout
+
+block content
+  #wrapper
+    .header
+      a#logo(href='/') /
+      p #{channel}
+      #menu-button ≡
+        ul(id='menu-list')
+          li
+            a#unmute(href='javascript:;')= t('unmute')
+
+    #chat-container
+      ul(id='chat-list')
+      .end
+
+    div(id='channel', data-channel='#{channel}')
+  #footer
+    #videoWrapper
+    form(method='post', id='composer-form')
+      .message-content
+        input(name='message', id='composer-message', class='input', maxlength='100', autocomplete='off', placeholder=t('messagePrompt'))
+        input(type='hidden', name='_csrf', value='#{csrf}')
+        #composer-blocker.hidden
+    #counter 100
+

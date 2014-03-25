@@ -1,0 +1,473 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+html, body {
+    height: 100%;
+    position: relative;
+}
+
+body {
+    background-color: #111;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+body.error {
+    color: #ff0c8a;
+}
+
+body.error h1 {
+    font-family: ;
+    font-size: 4rem;
+    font-weight: 800;
+    padding: 40px 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+body.error h1 span {
+    color: #fff;
+    display: block;
+    font-size: 7rem;
+}
+
+body.error p.small {
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 200;
+}
+
+#wrapper.home {
+    background: url('/images/logo.png') repeat-y;
+    color: #31dfff;
+    height: 100%;
+    text-align: center;
+}
+
+#wrapper.home h1 {
+    font-size: 3.5em;
+    margin-bottom: 50px;
+    padding-top: 20px;
+}
+
+#wrapper.home p {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+}
+
+#wrapper.home input {
+    background-color: #31dfff;
+    border: 0;
+    font-size: 1.4rem;
+    padding: 5px;
+    width: 100px;
+}
+
+#wrapper.home button {
+    background-color: #151515;
+    border: 0;
+    color: #31dfff;
+    cursor: pointer;
+    font-size: 1.9rem;
+    margin: 40px 10px 10px;
+    padding: 8px 15px;
+    width: 200px;
+}
+
+#wrapper.home button:hover {
+    background-color: #fff;
+    color: #111;
+}
+
+#menu-button {
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #31dfff;
+    margin-right: 16px;
+    position: absolute;
+    right: 10px;
+    text-align: right;
+    top: 7px;
+}
+
+#menu-button li a {
+    color: #287e8d;
+    display: block;
+    font-size: 1.2rem;
+    padding: 8px 18px 9px;
+    text-decoration: none;
+    background-color: #31dfff;
+    border-bottom: 1px solid rgba(255, 255, 255, .25);
+}
+
+#menu-button li a:hover {
+    background-color: #fff;
+    color: #111;
+}
+
+#menu-list {
+    display: none;
+    background-color: #31dfff;
+    position: absolute;
+    top: 45px;
+    right: -16px;
+    width: 192px;
+    z-index: 3;
+}
+
+#wrapper {
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    background-color: rgba(1, 1, 1, 0.6);
+    height: 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+}
+
+.header p {
+    color: #aaa;
+    font-size: 2rem;
+    font-weight: 100;
+    line-height: 2.9rem;
+    text-align: center;
+}
+
+#logo {
+    float: left;
+    text-indent: -9999px;
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    background: url('../images/logo-35.png') center no-repeat;
+    background-size: auto 100%;
+    margin: 5px 14px;
+    position: absolute;
+}
+
+.input, #counter {
+    color: #fff;
+    background: none;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.input {
+    width: 80%;
+    box-sizing: border-box;
+    margin-left: 171px;
+    padding: 0 100px 0 0;
+    border: none;
+    outline: none;
+    height: 50px;
+    line-height: 1;
+    resize: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+}
+
+#counter {
+    padding-top: 10px;
+    padding-right: 10px;
+    float: right;
+}
+
+input::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.input:focus { color: #fff; }
+
+#chat-list {
+    float: left;
+    margin-bottom: 99px;
+}
+
+#chat-container {
+    display: block;
+    max-width: 1208px;
+    min-width: 302px;
+    margin: 51px auto 0 auto;
+    padding: 10px;
+    position: relative;
+    width: 1208px;
+}
+
+#chat-container.lean {
+    padding-bottom: 0px;
+}
+
+#chat-container li {
+    float: left;
+    height: 300px;
+    margin: 1px;
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+    white-space: pre-wrap;
+}
+
+#chat-container li img {
+    position: absolute;
+    width: 300px;
+}
+
+#chat-container .out-of-view img {
+    display: none;
+}
+
+#chat-container li p {
+    background-color: rgba(1, 1, 1, 0.7);
+    bottom: 0;
+    color: #eee;
+    font-size: 0.95rem;
+    line-height: 1.1rem;
+    overflow: hidden;
+    padding: 10px;
+    font-weight: 300;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 280px;
+}
+
+#chat-container li .mute {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    background-color: #31dfff;
+    border: 0;
+    color: #287e8d;
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 8px 18px 9px;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#chat-container li:hover .mute {
+    display: block;
+}
+
+#chat-container li .mute:hover {
+    background-color: #fff;
+    color: #111;
+}
+
+#chat-container li .timestamp {
+    background-color: rgba(1, 1, 1, 0.6);
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    border: 0;
+    color: #eee;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 300;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 8px;
+}
+
+#chat-container li p span {
+    color: #70b4e4;
+    font-size: 0.8rem;
+}
+
+#chat-container li em {
+    font-style: italic;
+}
+
+#chat-container li b {
+    font-weight: 500;
+}
+
+#chat-container li p a {
+    color: #34a4b8;
+    text-decoration: none;
+}
+
+#chat-container li p a:hover {
+    background-color: #fff;
+}
+
+ul li.on {
+    background-color: #adf6ff;
+}
+
+.hidden {
+    display: none;
+}
+
+#composer-blocker {
+    color: rgba(255, 255, 255, .67);
+    background-color: #999;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    width: 100%;
+    padding: 10px 18px 14px 171px;
+    height: 27px;
+    margin: 0;
+    border: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+}
+
+#footer {
+    font-family: Arial;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 51px;
+    padding: 0;
+    background-color: rgba(1, 1, 1, 0.9);
+}
+
+#videoWrapper {
+    position: absolute;
+    width: 101px;
+    height: 101px;
+    bottom: 0;
+    left: 18px;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.end {
+    float: left;
+    height: 20px;
+    position: relative;
+    width: 1px;
+}
+
+@media only screen and (max-width: 1207px) {
+    #chat-container {
+        width: 906px;
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .input {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 945px) {
+    .input {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 905px) {
+    #chat-container {
+        width: 604px;
+    }
+}
+
+@media only screen and (max-width: 785px) {
+    #wrapper.home {
+        background-size: 50px;
+    }
+
+    #wrapper.home h1 {
+        font-size: 2.3rem;
+    }
+
+    #wrapper.home p span {
+        font-size: 1.2rem;
+    }
+
+    .input {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 655px) {
+    .input {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 603px) {
+    #chat-container {
+        width: 302px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    #wrapper.home p span {
+        display: block;
+        line-height: 1.8rem;
+    }
+
+    #counter {
+        display: none;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min--moz-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    #logo {
+        background: url('/images/logo-72.png') no-repeat;
+        background-size: auto 35px;
+    }
+}

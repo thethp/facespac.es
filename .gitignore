@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+clients.json
+local.json
+public/stylesheets/*-min.css
+public/javascripts/build
+public/javascripts/lib

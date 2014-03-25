@@ -1,0 +1,11 @@
+extend layout
+
+block content
+  #wrapper.home
+    h1 facespaces
+
+    form(method='post', action='/channel')
+      p
+        span http://facespac.es/c/
+        input(type='text', name='channel', required)
+      button(type='submit') Go

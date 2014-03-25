@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= t('pageTitle')
+    meta(content='width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0', name='viewport')
+    meta(content='yes', name='apple-mobile-web-app-capable')
+    link(rel='shortcut icon', href='/images/favicon.png')
+    if debug
+      link(rel='stylesheet', href='/stylesheets/main.css')
+    else
+      link(rel='stylesheet', href='/stylesheets/main-min.css')
+
+  body.error
+    #wrapper
+      .header
+        a#logo(href='/') /
+
+    block content
