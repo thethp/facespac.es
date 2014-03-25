@@ -34,7 +34,11 @@ module.exports = function (app, nconf, io) {
   });
 
   app.post('/channel', function (req, res, next) {
+<<<<<<< HEAD
+    diphenhydramine.getChats(req.body.channel, true, function (err, c) {
+=======
     diphenhydramine.getChats(req.body.channel.toString().slice(0, 80), true, function (err, c) {
+>>>>>>> 08a26a649dce0ea654c737434ce1f68656af04f3
       if (err) {
         res.status(400);
         res.render('400');
@@ -72,7 +76,11 @@ module.exports = function (app, nconf, io) {
   });
 
   var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
+<<<<<<< HEAD
+    diphenhydramine.addChat(message.slice(0, 250), channel, {
+=======
     diphenhydramine.addChat(message.slice(0, 100), channel, {
+>>>>>>> 08a26a649dce0ea654c737434ce1f68656af04f3
       ttl: 600000,
       media: picture,
       fingerprint: userId
