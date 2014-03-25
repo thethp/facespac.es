@@ -7,6 +7,8 @@ module.exports = function (app, nconf, io) {
   var uuid = require('uuid');
   var accessIds = {};
 
+  var MAX_TITLE = 80;
+
   var diphenhydramine = new Diphenhydramine({
     db: './db',
     limit: 48
@@ -34,11 +36,7 @@ module.exports = function (app, nconf, io) {
   });
 
   app.post('/channel', function (req, res, next) {
-<<<<<<< HEAD
-    diphenhydramine.getChats(req.body.channel, true, function (err, c) {
-=======
-    diphenhydramine.getChats(req.body.channel.toString().slice(0, 80), true, function (err, c) {
->>>>>>> 08a26a649dce0ea654c737434ce1f68656af04f3
+    diphenhydramine.getChats(req.body.channel.toString().slice(0, MAX_TITLE).toLowerCase(), true, function (err, c) {
       if (err) {
         res.status(400);
         res.render('400');
@@ -49,9 +47,9 @@ module.exports = function (app, nconf, io) {
   });
 
   app.get('/c/:channel', function (req, res, next) {
-    var channel = req.params.channel.toString().replace(/[^\w+]/gi, '').toLowerCase();
+    var channel = req.params.channel.toString().slice(0, MAX_TITLE).replace(/[^\w+]/gi, '').toLowerCase();
 
-    if (channel !== req.params.channel.toString().toLowerCase()) {
+    if (channel !== req.params.channel.toString().slice(0, MAX_TITLE).toLowerCase()) {
       res.redirect('/c/' + channel);
     } else {
 
@@ -76,11 +74,7 @@ module.exports = function (app, nconf, io) {
   });
 
   var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
-<<<<<<< HEAD
-    diphenhydramine.addChat(message.slice(0, 250), channel, {
-=======
     diphenhydramine.addChat(message.slice(0, 100), channel, {
->>>>>>> 08a26a649dce0ea654c737434ce1f68656af04f3
       ttl: 600000,
       media: picture,
       fingerprint: userId
