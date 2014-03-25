@@ -7,8 +7,6 @@ module.exports = function (app, nconf, io) {
   var uuid = require('uuid');
   var accessIds = {};
 
-  var MAX_TITLE = 80;
-
   var diphenhydramine = new Diphenhydramine({
     db: './db',
     limit: 48
@@ -31,40 +29,41 @@ module.exports = function (app, nconf, io) {
     io.sockets.in(channel).emit('message', { chat: chat });
   };
 
+  var cleanChannelTitle = function (channel) {
+    return channel.toString().slice(0, 32).replace(/[^\w+]/gi, '');
+  };
+
   app.get('/', function (req, res) {
     res.render('index');
   });
 
   app.post('/channel', function (req, res, next) {
-    diphenhydramine.getChats(req.body.channel.toString().slice(0, MAX_TITLE).toLowerCase(), true, function (err, c) {
+    var channel = cleanChannelTitle(req.body.channel);
+
+    diphenhydramine.getChats(channel, true, function (err, c) {
       if (err) {
         res.status(400);
         res.render('400');
       } else {
-        res.redirect('/c/' + req.body.channel);
+        res.redirect('/c/' + channel);
       }
     });
   });
 
   app.get('/c/:channel', function (req, res, next) {
-    var channel = req.params.channel.toString().slice(0, MAX_TITLE).replace(/[^\w+]/gi, '').toLowerCase();
+    var channel = cleanChannelTitle(req.params.channel);
 
-    if (channel !== req.params.channel.toString().slice(0, MAX_TITLE).toLowerCase()) {
-      res.redirect('/c/' + channel);
-    } else {
-
-      diphenhydramine.getChats(req.params.channel, true, function (err, c) {
-        if (err) {
-          res.status(400);
-          res.render('400');
-        } else {
-          res.render('channel', {
-            channel: req.params.channel,
-            chats: c.chats
-          });
-        }
-      });
-    }
+    diphenhydramine.getChats(channel, true, function (err, c) {
+      if (err) {
+        res.status(400);
+        res.render('400');
+      } else {
+        res.render('channel', {
+          channel: channel,
+          chats: c.chats
+        });
+      }
+    });
   });
 
   app.get('/ip', function (req, res) {
@@ -99,10 +98,12 @@ module.exports = function (app, nconf, io) {
   app.post('/c/:channel/chat', function (req, res, next) {
     var ip = req.ip;
     var userId = getUserId(req.body.fingerprint, ip);
+    var channel = cleanChannelTitle(req.params.channel);
+    var message = req.body.message.slice(0, 100);
 
     if (req.body.picture) {
       if ((userId === req.body.userid) || req.isApiUser) {
-        addChat(req.params.channel, req.body.message, req.body.picture, req.body.fingerprint, userId, ip, function (err, status) {
+        addChat(channel, message, req.body.picture, req.body.fingerprint, userId, ip, function (err, status) {
           if (err) {
             res.status(400);
             res.json({ error: err.toString() });
