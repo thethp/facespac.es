@@ -30,7 +30,7 @@ module.exports = function (app, nconf, io) {
   };
 
   var cleanChannelTitle = function (channel) {
-    return channel.toString().slice(0, 32).replace(/[^\w+]/gi, '');
+    return channel.toString().slice(0, 32).replace(/[^\w+]/gi, '').toLowerCase();
   };
 
   app.get('/', function (req, res) {
@@ -144,7 +144,7 @@ module.exports = function (app, nconf, io) {
           console.log('error retrieving chats: ' + err);
           return;
         }
-        
+
         if (results.chats && results.chats.length > 0) {
           try {
             results.chats.forEach(function (chat) {
