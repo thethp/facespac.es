@@ -140,10 +140,15 @@ module.exports = function (app, nconf, io) {
 
       // Fire out an initial burst of images to the connected client, assuming there are any available
       getSortedChats(data.channel, function (err, results) {
+        if (err) {
+          console.log('error retrieving chats: ' + err);
+          return;
+        }
+        
         if (results.chats && results.chats.length > 0) {
           try {
             results.chats.forEach(function (chat) {
-              emitChat(socket, data.channel, chat);
+              socket.emit('message', { chat: chat });
             });
           } catch (e) {
             if (typeof results.chats.forEach !== 'function') {
