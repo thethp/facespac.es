@@ -4,7 +4,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
   var videoShooter;
 
-  var CHAT_LIMIT = 48;
+  var CHAT_LIMIT = 24;
   var CHAR_LIMIT = 100;
 
   var auth = {
