@@ -73,6 +73,11 @@ module.exports = function (app, nconf, io) {
   });
 
   var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
+    if (!picture.match(/^[data:image\/jpeg]/)) {
+      next(new Error('Invalid image type: must be a jpeg'));
+      return;
+    }
+
     diphenhydramine.addChat(message.slice(0, 100), channel, {
       ttl: 600000,
       media: picture,
