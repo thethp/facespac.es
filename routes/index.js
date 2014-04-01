@@ -75,24 +75,25 @@ module.exports = function (app, nconf, io) {
   var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
     if (picture.indexOf('data:image/jpeg') !== 0) {
       next(new Error('Invalid image type: must be a jpeg'));
-    } else {
-      diphenhydramine.addChat(message.slice(0, 100), channel, {
-        ttl: 600000,
-        media: picture,
-        fingerprint: userId
-      }, function (err, c) {
-        if (err) {
-          next(err);
-        } else {
-          try {
-            emitChat(io.sockets, channel, { key: c.key, value: c });
-            next(null, 'sent!');
-          } catch (err) {
-            next(new Error('Could not emit message'));
-          }
-        }
-      });
+      return;
     }
+
+    diphenhydramine.addChat(message.slice(0, 100), channel, {
+      ttl: 600000,
+      media: picture,
+      fingerprint: userId
+    }, function (err, c) {
+      if (err) {
+        next(err);
+      } else {
+        try {
+          emitChat(io.sockets, channel, { key: c.key, value: c });
+          next(null, 'sent!');
+        } catch (err) {
+          next(new Error('Could not emit message'));
+        }
+      }
+    });
   };
 
   var getUserId = function(fingerprint, ip) {
