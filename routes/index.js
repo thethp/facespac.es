@@ -73,7 +73,7 @@ module.exports = function (app, nconf, io) {
   });
 
   var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
-    if (!picture.match(/^[data:image\/jpeg]/)) {
+    if (!picture.indexOf('data:image/jpeg') === 0) {
       next(new Error('Invalid image type: must be a jpeg'));
       return;
     }
