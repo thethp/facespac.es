@@ -14,16 +14,7 @@ module.exports = function (app, nconf, io) {
   });
 
   var getSortedChats = function (channel, done) {
-    diphenhydramine.getChats(channel, true, function (err, c) {
-      if (err) {
-        done(err);
-      } else {
-        if (c.chats && c.chats.length > 0) {
-          c.chats.reverse();
-        }
-        done(null, c);
-      }
-    });
+    diphenhydramine.getChats(channel, false, done);
   };
 
   var emitChat = function (socket, channel, chat) {
