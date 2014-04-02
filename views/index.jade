@@ -8,4 +8,5 @@ block content
       p
         span http://facespac.es/c/
         input(type='text', name='channel', required)
+        input(type='hidden', name='_csrf', value='#{csrf}')
       button(type='submit') Go
