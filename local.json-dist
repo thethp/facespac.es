@@ -4,7 +4,5 @@
     "authPort": 3000,
     "session_secret": "secret",
     "analytics": "your google analytics value",
-    "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
-    "postmark_api_key": "your postmark key",
-    "email": "postmark email"
+    "analyticsHost": "your domain without the protocol (e.g. someurl.com)"
 }

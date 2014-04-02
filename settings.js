@@ -3,7 +3,6 @@ module.exports = function(app, configurations, express) {
   var nconf = require('nconf');
   var i18n = require('i18next');
   var maxAge = 24 * 60 * 60 * 1000 * 28;
-  var csrf = express.csrf();
 
   nconf.argv().env().file({ file: 'local.json' });
 
@@ -29,9 +28,11 @@ module.exports = function(app, configurations, express) {
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());
     app.use(express.session({ secret: nconf.get('session_secret') }));
+    app.use(express.csrf());
     app.use(function (req, res, next) {
       res.locals.session = req.session;
-      res.locals.csrf = csrf;
+      res.cookie('XSRF-TOKEN', req.csrfToken());
+      res.locals.csrf = req.csrfToken();
 
       if (!process.env.NODE_ENV) {
         res.locals.debug = true;
