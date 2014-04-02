@@ -66,7 +66,7 @@ module.exports = function (app, nconf, io) {
     });
   });
 
-  var addChat = function (channel, message, picture, fingerprint, userId, ip, next) {
+  var addChat = function (channel, message, picture, userId, ip, next) {
     if (picture.indexOf('data:image/jpeg') !== 0) {
       next(new Error('Invalid image type: must be a jpeg'));
       return;
@@ -95,29 +95,37 @@ module.exports = function (app, nconf, io) {
   };
 
   app.post('/c/:channel/chat', function (req, res, next) {
+    if (!req.isApiUser &&
+        (typeof req.body.fingerprint === 'undefined' || req.body.fingerprint.length > 10)) {
+      // client is either not sending a fingerprint or sending one longer than we would ever receive
+      // from fingerprintjs, which means they're likely trying to generate MD5 collisions with other
+      // clients
+      res.status(403);
+      return res.json({ error: 'invalid fingerprint' });
+    }
+    if (!req.body.picture) {
+      res.status(400);
+      return res.json({ error: 'you need webrtc' });
+    }
+
     var ip = req.ip;
     var userId = getUserId(req.body.fingerprint, ip);
+    if (userId !== req.body.userid && !req.isApiUser) {
+      res.status(403);
+      return res.json({ error: 'invalid fingerprint' });
+    }
+
     var channel = cleanChannelTitle(req.params.channel);
     var message = req.body.message.slice(0, 100);
 
-    if (req.body.picture) {
-      if ((userId === req.body.userid) || req.isApiUser) {
-        addChat(channel, message, req.body.picture, req.body.fingerprint, userId, ip, function (err, status) {
-          if (err) {
-            res.status(400);
-            res.json({ error: err.toString() });
-          } else {
-            res.json({ status: status });
-          }
-        });
+    addChat(channel, message, req.body.picture, userId, ip, function (err, status) {
+      if (err) {
+        res.status(400);
+        res.json({ error: err.toString() });
       } else {
-        res.status(403);
-        res.json({ error: 'invalid fingerprint' });
+        res.json({ status: status });
       }
-    } else {
-      res.status(400);
-      res.json({ error: 'you need webrtc' });
-    }
+    });
   });
 
   var isInChannel = function(socket, channel) {
@@ -129,7 +137,7 @@ module.exports = function (app, nconf, io) {
     if (socket.handshake.headers['x-forwarded-for']) {
       ip = socket.handshake.headers['x-forwarded-for'].split(/ *, */)[0];
     }
-    socket.emit('ip', ip)
+    socket.emit('ip', ip);
 
     socket.on('join', function (data) {
       if (!data.channel || isInChannel(socket, data.channel)) {
