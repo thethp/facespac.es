@@ -203,7 +203,11 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
             window.ga('send', 'event', 'message', 'send');
           }
         }).error(function (data) {
-          alert(data.responseJSON.error);
+          if (data && data.responseJSON) {
+            alert(data.responseJSON.error);
+          } else {
+            alert('Error posting message!');
+          }
         }).always(function (data) {
           composer.message.prop('readonly', false);
           composer.message.val('');
