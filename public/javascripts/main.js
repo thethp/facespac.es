@@ -33,7 +33,6 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var channel = false;
   var isPosting = false;
   var canSend = true;
-  var muteText = body.data('mute');
   var mutes = JSON.parse(localStorage.getItem('muted')) || [];
   var favicon = new Favico({
     animation: 'none',
@@ -98,7 +97,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
           updateNotificationCount();
 
           var button = document.createElement('button');
-          button.textContent = muteText;
+          button.textContent = 'Mute';
           button.className = 'mute';
           li.appendChild(button);
         }
@@ -192,7 +191,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
         setTimeout(function () {
           canSend = true;
-        }, 2000);
+        }, 1500);
 
         var picture = videoShooter.getShot();
         var submission = composer.inputs.reduce(function(data, input) {

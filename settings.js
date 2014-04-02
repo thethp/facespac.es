@@ -1,19 +1,26 @@
 // Module dependencies.
 module.exports = function(app, configurations, express) {
   var nconf = require('nconf');
-  var i18n = require('i18next');
   var maxAge = 24 * 60 * 60 * 1000 * 28;
+  var csrf = express.csrf();
 
   nconf.argv().env().file({ file: 'local.json' });
 
-  i18n.init({
-    lng: nconf.get('locale'), // undefined detects user browser settings
-    supportedLngs: ['en'],
-    fallbackLng: 'en',
-    useCookie: false,
-    resGetPath: 'locales/__lng__.json'
-  });
-  i18n.registerAppHelper(app);
+  // Configuration
+  var checkApiKey = function (req, res, next) {
+    if (req.body.apiKey && nativeClients.indexOf(req.body.apiKey) > -1) {
+      req.isApiUser = true;
+    }
+    next();
+  };
+
+  var clientBypassCSRF = function (req, res, next) {
+    if (req.isApiUser) {
+      next();
+    } else {
+      csrf(req, res, next);
+    }
+  };
 
   app.configure(function () {
     app.set('views', __dirname + '/views');
@@ -27,12 +34,20 @@ module.exports = function(app, configurations, express) {
     }
     app.use(express.static(__dirname + '/public'));
     app.use(express.cookieParser());
-    app.use(express.session({ secret: nconf.get('session_secret') }));
-    app.use(express.csrf());
+    app.use(express.session({
+      secret: nconf.get('session_secret')
+    }));
+    app.use(checkApiKey);
+    app.use(clientBypassCSRF);
     app.use(function (req, res, next) {
       res.locals.session = req.session;
-      res.cookie('XSRF-TOKEN', req.csrfToken());
-      res.locals.csrf = req.csrfToken();
+
+      if (!req.body.apiKey) {
+        res.cookie('XSRF-TOKEN', req.csrfToken());
+        res.locals.csrf = req.csrfToken();
+      } else {
+        res.locals.csrf = false;
+      }
 
       if (!process.env.NODE_ENV) {
         res.locals.debug = true;
@@ -43,9 +58,13 @@ module.exports = function(app, configurations, express) {
       res.locals.analyticsHost = nconf.get('analyticsHost');
       next();
     });
-    app.use(i18n.handle);
     app.enable('trust proxy');
     app.locals.pretty = true;
+    app.use(function (req, res, next) {
+      // prevent framing by other sites
+      res.set('X-Frame-Options', 'SAMEORIGIN');
+      next();
+    });
     app.use(app.router);
     app.use(function (req, res, next) {
       res.status(404);
@@ -65,7 +84,10 @@ module.exports = function(app, configurations, express) {
   });
 
   app.configure('development, test', function() {
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    app.use(express.errorHandler({
+      dumpExceptions: true,
+      showStack: true
+    }));
   });
 
   app.configure('prod', function() {

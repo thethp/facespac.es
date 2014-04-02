@@ -5,10 +5,11 @@ module.exports = function (app, nconf, io) {
   var Diphenhydramine = require('diphenhydramine');
   var level = require('level');
   var uuid = require('uuid');
-  var accessIds = {};
+
+  var nativeClients = require('../clients.json');
 
   var diphenhydramine = new Diphenhydramine({
-    db: './db',
+    db: './db/c',
     limit: 24
   });
 
@@ -166,6 +167,20 @@ module.exports = function (app, nconf, io) {
           }
         }
       });
+    });
+
+    socket.on('message', function (data) {
+      if (nativeClients.indexOf(data.apiKey) > -1) {
+        var userId = getUserId(data.fingerprint, ip);
+
+        addChat(data.channel, data.message, data.picture, data.fingerprint, userId, ip, function (err) {
+          if (err) {
+            console.log('error posting ', err.toString());
+          }
+        });
+      } else {
+        console.log('Invalid apiKey');
+      }
     });
   });
 };

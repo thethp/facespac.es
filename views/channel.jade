@@ -8,7 +8,7 @@ block content
       #menu-button ≡
         ul(id='menu-list')
           li
-            a#unmute(href='javascript:;')= t('unmute')
+            a#unmute(href='javascript:;') Unmute
 
     #chat-container
       ul(id='chat-list')
@@ -19,7 +19,7 @@ block content
     #videoWrapper
     form(method='post', id='composer-form')
       .message-content
-        input(name='message', id='composer-message', class='input', maxlength='100', autocomplete='off', placeholder=t('messagePrompt'))
+        input(name='message', id='composer-message', class='input', maxlength='100', autocomplete='off', placeholder='Send a message')
         input(type='hidden', name='_csrf', value='#{csrf}')
         #composer-blocker.hidden
     #counter 100
