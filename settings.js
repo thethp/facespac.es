@@ -54,7 +54,7 @@ module.exports = function(app, configurations, express) {
     });
     app.use(function (req, res, next) {
       res.status(403);
-      res.render('403', { url: req.url, layout: false });
+      res.render('403', { url: req.url });
       return;
     });
     app.use(function (req, res, next) {
@@ -71,7 +71,7 @@ module.exports = function(app, configurations, express) {
   app.configure('prod', function() {
     app.use(function(err, req, res, next) {
       res.status(err.status || 500);
-      res.render('500', { error: err, layout: false });
+      res.render(err.status || 500, { error: err });
     });
     app.use(express.errorHandler());
   });
