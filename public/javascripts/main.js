@@ -135,8 +135,8 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     chat.container.addClass('lean');
   };
 
-  $.get('/ip?t=' + Date.now(), function (data) {
-    auth.userid = md5(auth.fingerprint + data.ip);
+  socket.on('ip', function(ip) {
+    auth.userid = md5(auth.fingerprint + ip);
   });
 
   body.on('click', '#unmute', function (ev) {

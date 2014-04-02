@@ -58,6 +58,8 @@ module.exports = function (app, nconf, io) {
     });
   });
 
+  // This method is deprecated! New clients should receive their IP when socket.io connects.
+  // TODO(tec27): Remove this method when we can be sure no clients are using it
   app.get('/ip', function (req, res) {
     res.json({
       ip: req.ip
@@ -127,6 +129,7 @@ module.exports = function (app, nconf, io) {
     if (socket.handshake.headers['x-forwarded-for']) {
       ip = socket.handshake.headers['x-forwarded-for'].split(/ *, */)[0];
     }
+    socket.emit('ip', ip)
 
     socket.on('join', function (data) {
       if (!data.channel || isInChannel(socket, data.channel)) {
