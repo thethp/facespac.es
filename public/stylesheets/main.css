@@ -205,7 +205,7 @@ body.error p.small {
 .input {
     width: 80%;
     box-sizing: border-box;
-    margin-left: 171px;
+    margin-left: 131px;
     padding: 0 100px 0 0;
     border: none;
     outline: none;
@@ -436,21 +436,15 @@ ul li.on {
     #wrapper.home p span {
         font-size: 1.2rem;
     }
-
-    .input {
-        width: 65%;
-    }
-}
-
-@media only screen and (max-width: 655px) {
-    .input {
-        width: 60%;
-    }
 }
 
 @media only screen and (max-width: 603px) {
     #chat-container {
         width: 302px;
+    }
+
+    .input {
+        font-size: 1.2rem;
     }
 }
 
@@ -458,6 +452,10 @@ ul li.on {
     #wrapper.home p span {
         display: block;
         line-height: 1.8rem;
+    }
+
+    .header p {
+        font-size: 1.2rem;
     }
 
     #counter {
