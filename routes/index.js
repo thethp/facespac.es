@@ -152,19 +152,9 @@ module.exports = function (app, nconf, io) {
         }
 
         if (results.chats && results.chats.length > 0) {
-          try {
-            results.chats.forEach(function (chat) {
-              socket.emit('message', { chat: chat });
-            });
-          } catch (e) {
-            if (typeof results.chats.forEach !== 'function') {
-              console.log('chats is type of ', typeof results.chats, ' and somehow has length ', results.chats.length);
-
-              if (typeof results.chats === 'string') {
-                console.log('results.chats appears to be a string');
-              }
-            }
-          }
+          results.chats.forEach(function (chat) {
+            socket.emit('message', { chat: chat });
+          });
         }
       });
     });
