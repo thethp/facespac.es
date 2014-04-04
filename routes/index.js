@@ -73,7 +73,6 @@ module.exports = function (app, nconf, io) {
     }
 
     diphenhydramine.addChat(message.slice(0, 100), channel, {
-      ttl: 600000,
       media: picture,
       fingerprint: userId
     }, function (err, c) {
