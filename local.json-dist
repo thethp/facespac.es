@@ -6,4 +6,12 @@
     "analytics": "your google analytics value",
     "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
     "redis_db": 0
+    "ads": [
+      {
+        "id": "tumblr",
+        "url": "https://tumblr.com",
+        "title": "Tumblr",
+        "banner": "tumblr.gif"
+      }
+    ]
 }

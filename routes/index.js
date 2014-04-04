@@ -6,6 +6,7 @@ module.exports = function (app, nconf, io) {
   var level = require('level');
   var uuid = require('uuid');
 
+  var ads = require('../lib/ads');
   var nativeClients = require('../clients.json');
 
   var diphenhydramine = new Diphenhydramine({
@@ -50,6 +51,8 @@ module.exports = function (app, nconf, io) {
         res.status(400);
         res.render('400');
       } else {
+        c.chats = ads.getAd(nconf, c.chats);
+
         res.render('channel', {
           channel: channel,
           chats: c.chats
