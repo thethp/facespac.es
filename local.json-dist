@@ -4,5 +4,6 @@
     "authPort": 3000,
     "session_secret": "secret",
     "analytics": "your google analytics value",
-    "analyticsHost": "your domain without the protocol (e.g. someurl.com)"
+    "analyticsHost": "your domain without the protocol (e.g. someurl.com)",
+    "redis_db": 0
 }
