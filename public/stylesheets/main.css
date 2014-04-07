@@ -242,22 +242,6 @@ input::-webkit-input-placeholder {
     width: 100%;
 }
 
-#banner-list {
-    display: block;
-    margin: 0 auto;
-    width: 516px;
-}
-
-#chat-container #banner-list li {
-    height: 170px;
-    width: 170px;
-}
-
-#chat-container #banner-list li img {
-    margin: 4px;
-    width: 160px;
-}
-
 #chat-container {
     display: block;
     max-width: 1208px;
@@ -466,20 +450,6 @@ ul li.on {
 @media only screen and (max-width: 603px) {
     #chat-container {
         width: 302px;
-    }
-
-    #banner-list {
-        width: 320px;
-    }
-
-    #chat-container #banner-list li {
-        height: 101px;
-        width: 101px;
-    }
-
-    #chat-container #banner-list li img {
-        margin: 3px;
-        width: 90px;
     }
 
     .input {

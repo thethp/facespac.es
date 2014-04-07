@@ -11,7 +11,7 @@ module.exports = function (app, nconf, io) {
 
   var diphenhydramine = new Diphenhydramine({
     db: './db/c',
-    limit: 24
+    limit: 33
   });
 
   var getSortedChats = function (channel, done) {
@@ -51,11 +51,8 @@ module.exports = function (app, nconf, io) {
         res.status(400);
         res.render('400');
       } else {
-        c.chats = ads.getAd(nconf, c.chats);
-
         res.render('channel', {
-          channel: channel,
-          chats: c.chats
+          channel: channel
         });
       }
     });
@@ -156,6 +153,8 @@ module.exports = function (app, nconf, io) {
         }
 
         if (results.chats && results.chats.length > 0) {
+          results.chats = ads.getAd(nconf, results.chats);
+
           results.chats.forEach(function (chat) {
             socket.emit('message', { chat: chat });
           });

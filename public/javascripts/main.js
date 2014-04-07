@@ -4,7 +4,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
   var videoShooter;
 
-  var CHAT_LIMIT = 24;
+  var CHAT_LIMIT = 34;
   var CHAR_LIMIT = 100;
 
   var auth = {
@@ -90,10 +90,18 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
         var li = document.createElement('li');
         li.dataset.key = incoming.key;
         li.dataset.fingerprint = fingerprint;
-        li.appendChild(img);
+
+        if (incoming.value.ad) {
+          var adLink = document.createElement('a');
+          adLink.href = incoming.value.url;
+          adLink.appendChild(img);
+          li.appendChild(adLink);
+        } else {
+          li.appendChild(img);
+        }
 
         // This is likely your own fingerprint so you don't mute yourself. Unless you're weird.
-        if (auth.userid !== fingerprint) {
+        if (auth.userid !== fingerprint || incoming.value.ad) {
           updateNotificationCount();
 
           var button = document.createElement('button');
@@ -230,6 +238,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   });
 
   socket.on('message', function (data) {
+    console.log(data.chat)
     render(data.chat);
   });
 
