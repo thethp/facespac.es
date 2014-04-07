@@ -11,7 +11,7 @@ module.exports = function (app, nconf, io) {
 
   var diphenhydramine = new Diphenhydramine({
     db: './db/c',
-    limit: 33
+    limit: 35
   });
 
   var getSortedChats = function (channel, done) {
