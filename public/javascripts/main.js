@@ -238,7 +238,6 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   });
 
   socket.on('message', function (data) {
-    console.log(data.chat)
     render(data.chat);
   });
 
