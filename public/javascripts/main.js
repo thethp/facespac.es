@@ -101,7 +101,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
         }
 
         // This is likely your own fingerprint so you don't mute yourself. Unless you're weird.
-        if (auth.userid !== fingerprint || !incoming.value.ad) {
+        if (auth.userid !== fingerprint && !incoming.value.ad) {
           updateNotificationCount();
 
           var button = document.createElement('button');
