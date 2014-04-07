@@ -233,17 +233,23 @@ input::-webkit-input-placeholder {
 #chat-list {
     float: left;
     margin-bottom: 99px;
+    width: 100%;
 }
 
 #banner-list {
-    clear: both;
+    display: block;
     margin: 0 auto;
-    width: 920px;
+    width: 516px;
+}
+
+#chat-container #banner-list li {
+    height: 170px;
+    width: 170px;
 }
 
 #chat-container #banner-list li img {
-    margin: 20px;
-    width: 260px;
+    margin: 4px;
+    width: 160px;
 }
 
 #chat-container {
@@ -428,20 +434,6 @@ ul li.on {
 @media only screen and (max-width: 905px) {
     #chat-container {
         width: 604px;
-    }
-
-    #banner-list {
-        width: 516px;
-    }
-
-    #chat-container #banner-list li {
-        height: 170px;
-        width: 170px;
-    }
-
-    #chat-container #banner-list li img {
-        margin: 4px;
-        width: 160px;
     }
 }
 
