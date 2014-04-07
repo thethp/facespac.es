@@ -94,6 +94,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
         if (incoming.value.ad) {
           var adLink = document.createElement('a');
           adLink.href = incoming.value.url;
+          adLink.target = '_blank';
           adLink.appendChild(img);
           li.appendChild(adLink);
         } else {
