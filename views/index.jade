@@ -4,9 +4,26 @@ block content
   #wrapper.home
     h1 facespaces
 
+    p Jump to any channel you want and make a selfie!
+
     form(method='post', action='/channel')
       p
         span http://facespac.es/c/
         input(type='text', name='channel', required)
         input(type='hidden', name='_csrf', value='#{csrf}')
-      button(type='submit') Go
+      button(type='submit') Go!
+
+    #chat-container
+      ul(id='chat-list')
+        li
+          img(src='/images/laura.jpg')
+        li
+          img(src='/images/avery.jpg')
+        li
+          img(src='/images/lydia.jpg')
+        li
+          img(src='/images/jory.jpg')
+
+    #footer-home
+      a(href='https://chat.meatspac.es')
+        img(src='/images/banners/meatspace.png', alt='Brought to you by Meatspace', title='Brought to you by Meatspace')
