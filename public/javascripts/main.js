@@ -29,7 +29,8 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var body = $('body');
   var counter = $('#counter');
   var footer = $('#footer');
-  var videoWrapper = $('#videoWrapper');
+  var videoWrapper = $('#video-wrapper');
+  var userCount = $('.user-count');
   var channel = false;
   var isPosting = false;
   var canSend = true;
@@ -146,6 +147,14 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
   socket.on('ip', function(ip) {
     auth.userid = md5(auth.fingerprint + ip);
+  });
+
+  socket.on('disconnect', function() {
+    userCount.text('?');
+  });
+
+  socket.on('count', function(data) {
+    userCount.text(data.count);
   });
 
   var isFocusingKey = function (ev) {

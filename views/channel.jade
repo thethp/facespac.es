@@ -5,6 +5,7 @@ block content
     .header
       a#logo(href='/') /
       p #{channel}
+      span.user-count ?
       #menu-button ≡
         ul(id='menu-list')
           li
@@ -16,7 +17,7 @@ block content
 
     div(id='channel', data-channel='#{channel}')
   #footer
-    #videoWrapper
+    #video-wrapper
     form(method='post', id='composer-form')
       .message-content
         input(name='message', id='composer-message', class='input', maxlength='100', autocomplete='off', placeholder='Send a message')

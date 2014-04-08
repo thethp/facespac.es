@@ -127,7 +127,15 @@ module.exports = function (app, nconf, io) {
     });
   });
 
-  var isInChannel = function(socket, channel) {
+  var emitChannelCount = function (channel) {
+    var count = io.sockets.clients(channel).length;
+    io.sockets.in(channel).emit('count', {
+      channel: channel,
+      count: count
+    });
+  };
+
+  var isInChannel = function (socket, channel) {
     return io.sockets.manager.roomClients[socket.id]['/' + channel];
   };
 
@@ -138,12 +146,26 @@ module.exports = function (app, nconf, io) {
     }
     socket.emit('ip', ip);
 
+    var disconnectHandlers = Object.create(null);
+    socket.on('disconnect', function () {
+      disconnectHandlers = null;
+    });
+
     socket.on('join', function (data) {
       if (!data.channel || isInChannel(socket, data.channel)) {
         return;
       }
 
       socket.join(data.channel);
+      emitChannelCount(data.channel);
+      if (!disconnectHandlers[data.channel]) {
+        disconnectHandlers[data.channel] = function () {
+          process.nextTick(function () {
+            emitChannelCount(data.channel);
+          });
+        };
+        socket.on('disconnect', disconnectHandlers[data.channel]);
+      }
 
       // Fire out an initial burst of images to the connected client, assuming there are any available
       getSortedChats(data.channel, function (err, results) {

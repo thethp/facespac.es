@@ -180,24 +180,41 @@ body.error p.small {
     position: fixed;
     right: 0;
     top: 0;
+    text-align: center;
     width: 100%;
     z-index: 6;
 }
 
 .header p {
     color: #aaa;
+    display: inline-block;
     font-size: 2rem;
     font-weight: 100;
     line-height: 2.9rem;
     text-align: center;
 }
 
+.header .user-count {
+    background-color: #f181ad;
+    border-radius: 50%;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 100;
+    line-height: 2.3rem;
+    margin-left: 30px;
+    min-width: 2.2rem;
+    padding-left: 0.05rem;
+    padding-right: 0.05rem;
+    text-align: center;
+}
+
 #logo {
-    float: left;
     text-indent: -9999px;
     display: inline-block;
     height: 35px;
     width: 35px;
+    left: 0;
     background: url('../images/logo-35.png') center no-repeat;
     background-size: auto 100%;
     margin: 5px 14px;
@@ -396,7 +413,7 @@ ul li.on {
     background-color: rgba(1, 1, 1, 0.9);
 }
 
-#videoWrapper {
+#video-wrapper {
     position: absolute;
     width: 101px;
     height: 101px;
@@ -469,6 +486,10 @@ ul li.on {
 
     .header p {
         font-size: 1.2rem;
+    }
+
+    .header .user-count {
+        font-size: 1rem;
     }
 
     #counter {
