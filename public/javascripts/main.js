@@ -31,6 +31,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var footer = $('#footer');
   var videoWrapper = $('#video-wrapper');
   var userCount = $('.user-count');
+  var currentDay = $('#current-day');
   var channel = false;
   var isPosting = false;
   var canSend = true;
@@ -57,6 +58,21 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
       }
     });
   }
+
+  // change to the current day
+  var getToday = function () {
+    return {
+      0: 'sunday',
+      1: 'monday',
+      2: 'tuesday',
+      3: 'wednesday',
+      4: 'thursday',
+      5: 'friday',
+      6: 'saturday'
+    }[new Date().getDay()];
+  };
+
+  currentDay.attr('href', '/c/' + getToday());
 
   var handleVisibilityChange = function () {
     if (!document[pageHidden]) {
