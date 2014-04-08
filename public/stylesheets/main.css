@@ -195,18 +195,20 @@ body.error p.small {
 }
 
 .header .user-count {
-    background-color: #f181ad;
+    background-color: #ff3586;
     border-radius: 50%;
-    color: #ffffff;
+    color: #fff;
     display: inline-block;
-    font-size: 1.5rem;
-    font-weight: 100;
-    line-height: 2.3rem;
-    margin-left: 30px;
-    min-width: 2.2rem;
-    padding-left: 0.05rem;
-    padding-right: 0.05rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.9rem;
+    margin-left: 20px;
+    min-width: 1.9rem;
+    padding-left: 0.02rem;
+    padding-right: 0.02rem;
+    position: relative;
     text-align: center;
+    top: -5px;
 }
 
 #logo {
