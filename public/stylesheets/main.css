@@ -207,9 +207,9 @@ body.error p.small {
 }
 
 .header .user-count {
-    background-color: #ff008a;
+    background-color: #333;
     border-radius: 50%;
-    color: #ffc0e2;
+    color: #aaa;
     display: inline-block;
     font-size: 1.1rem;
     font-weight: 300;
