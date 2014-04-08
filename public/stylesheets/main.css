@@ -108,6 +108,10 @@ body.error p.small {
     width: 100px;
 }
 
+#wrapper.home #chat-container {
+    width: 604px;
+}
+
 #wrapper.home #chat-list {
     margin-top: 10px;
 }
@@ -448,7 +452,7 @@ ul li.on {
 }
 
 @media only screen and (max-width: 603px) {
-    #chat-container {
+    #chat-container, #wrapper.home #chat-container {
         width: 302px;
     }
 
