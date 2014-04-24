@@ -102,6 +102,7 @@ module.exports = function (app, nconf, io) {
       res.status(403);
       return res.json({ error: 'invalid fingerprint' });
     }
+
     if (!req.body.picture) {
       res.status(400);
       return res.json({ error: 'you need webrtc' });

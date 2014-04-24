@@ -8,6 +8,8 @@ module.exports = function(app, configurations, express) {
 
   nconf.argv().env().file({ file: 'local.json' });
 
+  var nativeClients = require('../clients.json');
+
   // Configuration
   var checkApiKey = function (req, res, next) {
     if (req.body.apiKey && nativeClients.indexOf(req.body.apiKey) > -1) {
