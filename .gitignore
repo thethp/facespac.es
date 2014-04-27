@@ -5,3 +5,4 @@ local.json
 public/stylesheets/*-min.css
 public/javascripts/build
 public/javascripts/lib
+tests/*.xml
