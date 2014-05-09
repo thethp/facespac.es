@@ -157,6 +157,15 @@ module.exports = function (app, nconf, io) {
         return;
       }
 
+      // if the user is already in a different channel, leave that channel first
+      Object.keys(io.sockets.manager.roomClients[socket.id]).forEach(function(channel) {
+        if (channel) { // if its not the main channel (which is '')
+          socket.leave(channel.substring(1)); // have to strip off leading '/'
+        }
+      });
+
+      console.dir(Object.keys(io.sockets.manager.roomClients[socket.id]));
+
       socket.join(data.channel);
       emitChannelCount(data.channel);
       if (!disconnectHandlers[data.channel]) {
