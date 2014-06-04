@@ -191,8 +191,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   };
 
   // count down the seconds in the countdown element
-  var countdown = function(ev) {
-
+  var countdown = function() {
     var num =  parseInt(countdownContainer.html(), 10);
 
     if (num > 0) {
@@ -229,7 +228,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   });
 
   // show/hide interval modal
-  body.on('click', '#interval', function(ev) {
+  menu.list.on('click', '#interval', function(ev) {
     if (isIntervalRunning) {
       interval.hide();
     } else {
@@ -238,7 +237,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   });
 
   // cancel interval
-  body.on('click', '#countdown', function(ev) {
+  countdownContainer.on('click', function(ev) {
     countdownContainer.html(0).data('ms', 0).hide();
     isIntervalRunning = false;
     window.clearTimeout(ticktock);
@@ -249,30 +248,28 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     if (ev.keyCode == 13) {
       var value = parseInt(intervalInput.val(), 10);
 
-      // if the value isn't a parseable number, fail it
       if (isNaN(value)) {
+        // if the value isn't a parseable number, fail it
         tip.html('write a real number pls');
         return;
       }
 
-      // if the video isn't enabled
       if (videoWrapper.children().length < 1) {
+        // if the video isn't enabled
         tip.html('enable your camera first');
         return;
       }
 
-      // if the number is less than 5
       if (value < 5) {
+        // if the number is less than 5
         tip.html('interval must be greater than 5 seconds pls');
         return;
       }
 
       if (isIntervalRunning) {
         return;
-      }
-
-      // otherwise make an interval!
-      else {
+      } else {
+        // otherwise make an interval!
         isIntervalRunning = true;
 
         interval.fadeOut(500, function() {
