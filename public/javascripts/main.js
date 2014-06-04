@@ -32,6 +32,12 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var videoWrapper = $('#video-wrapper');
   var userCount = $('.user-count');
   var currentDay = $('#current-day');
+  var interval = $('#interval-container');
+  var intervalInput = $('#interval-input');
+  var isIntervalRunning = false;
+  var countdownContainer = $('#countdown');
+  var tip = $('.tip');
+  var ticktock; // interval function
   var channel = false;
   var isPosting = false;
   var canSend = true;
@@ -184,14 +190,102 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     );
   };
 
+  // count down the seconds in the countdown element
+  var countdown = function(ev) {
+
+    var num =  parseInt(countdownContainer.html(), 10);
+
+    if (num > 0) {
+      countdownContainer.html(num - 1);
+    } else {
+      window.clearTimeout(ticktock);
+      go();
+    }
+  };
+
+  var go = function() {
+    $('form').trigger('submit');
+    // alert('submitted!');
+    countdownContainer.html(countdownContainer.data('ms'));
+    ticktock = window.setInterval(function() {
+      countdown();
+    }, 1000);
+  };
+
   body.on('click', '#unmute', function (ev) {
     if (ev.target.id === 'unmute') {
       localStorage.removeItem('muted');
       mutes = [];
     }
   }).on('keydown', function (ev) {
+    if (ev.target.id === 'interval-input') {
+      return;
+    }
+    if (ev.keyCode === 27) {
+      interval.hide();
+    }
     if (isFocusingKey(ev) && ev.target !== composer.message[0]) {
       composer.message.focus();
+    }
+  });
+
+  // show/hide interval modal
+  body.on('click', '#interval', function(ev) {
+    if (isIntervalRunning) {
+      interval.hide();
+    } else {
+      interval.toggle();
+    }
+  });
+
+  // cancel interval
+  body.on('click', '#countdown', function(ev) {
+    countdownContainer.html(0).data('ms', 0).hide();
+    isIntervalRunning = false;
+    window.clearTimeout(ticktock);
+  })
+
+  // listen for interval enter keypress and start the interval
+  interval.on('keypress', '#interval-input', function(ev) {
+    if (ev.keyCode == 13) {
+      var value = parseInt(intervalInput.val(), 10);
+
+      // if the value isn't a parseable number, fail it
+      if (isNaN(value)) {
+        tip.html('write a real number pls');
+        return;
+      }
+
+      // if the video isn't enabled
+      if (videoWrapper.children().length < 1) {
+        tip.html('enable your camera first');
+        return;
+      }
+
+      // if the number is less than 5
+      if (value < 5) {
+        tip.html('interval must be greater than 5 seconds pls');
+        return;
+      }
+
+      if (isIntervalRunning) {
+        return;
+      }
+
+      // otherwise make an interval!
+      else {
+        isIntervalRunning = true;
+
+        interval.fadeOut(500, function() {
+          tip.html('click the countdown timer to cancel interval');
+        });
+
+        countdownContainer.show().html(value).data('ms', value);
+
+        ticktock = window.setInterval(function() {
+          countdown();
+        }, 1000);
+      }
     }
   });
 
