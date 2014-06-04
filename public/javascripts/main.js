@@ -199,13 +199,12 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
       countdownContainer.html(num - 1);
     } else {
       window.clearTimeout(ticktock);
-      go();
+      intervalSubmit();
     }
   };
 
-  var go = function() {
+  var intervalSubmit = function() {
     $('form').trigger('submit');
-    // alert('submitted!');
     countdownContainer.html(countdownContainer.data('ms'));
     ticktock = window.setInterval(function() {
       countdown();
