@@ -463,13 +463,13 @@ ul li.on {
     width: 80px;
 }
 
-#countdown:hover {
-    background-color: #ff008a;
-}
-
 #countdown:active {
     background-color: #cc1465;
     color: #fff;
+}
+
+#countdown:hover {
+    background-color: #ff008a;
 }
 
 #interval-container {
@@ -479,7 +479,7 @@ ul li.on {
     display: none;
     font-size: 72px;
     font-weight: 600;
-    height: 180px;
+    height: 210px;
     left: 50%;
     margin-left: -180px;
     position: fixed;
@@ -488,20 +488,13 @@ ul li.on {
     width: 360px;
 }
 
-#interval-container p {
-    margin-bottom: -35px;
-}
-
 #interval-container label {
     font-size: 18px;
     font-weight: 400;
 }
 
-.tip {
-    display: block;
-    font-size: 12px;
-    font-weight: 400;
-    margin-top: 10px;
+#interval-container p {
+    margin-bottom: -45px;
 }
 
 #interval-input {
@@ -509,6 +502,24 @@ ul li.on {
     margin-top: 20px;
     text-align: center;
     width: 70px;
+}
+
+#interval-submit {
+    background: #1199B2;
+    border: 1px solid #31dfff;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 20px;
+    font-size: 14px;
+    margin: 5px auto;
+    display: block;
+}
+
+.tip {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 15px;
 }
 
 

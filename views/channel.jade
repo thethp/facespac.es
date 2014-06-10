@@ -21,7 +21,16 @@ block content
     div#interval-container
       p interval!
       label(for='interval-input') enter seconds:
-        input(id='interval-input', type='text', maxlength='3')
+        select(id='interval-input')
+          option(value='5') 5
+          option(value='10') 10
+          option(value='15') 15
+          option(value='20', selected='selected') 20
+          option(value='30') 30
+          option(value='60') 60
+          option(value='120') 120
+      button#interval-submit start
+
       small.tip click the countdown timer to cancel interval
 
   #footer

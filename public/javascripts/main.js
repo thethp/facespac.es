@@ -33,7 +33,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var userCount = $('.user-count');
   var currentDay = $('#current-day');
   var interval = $('#interval-container');
-  var intervalInput = $('#interval-input');
+  var intervalSelect = $('#interval-input');
   var isIntervalRunning = false;
   var countdownContainer = $('#countdown');
   var tip = $('.tip');
@@ -243,16 +243,8 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     window.clearTimeout(ticktock);
   })
 
-  // listen for interval enter keypress and start the interval
-  interval.on('keypress', '#interval-input', function (ev) {
-    if (ev.keyCode == 13) {
-      var value = parseInt(intervalInput.val(), 10);
-
-      if (isNaN(value)) {
-        // if the value isn't a parseable number, fail it
-        tip.html('write a real number pls');
-        return;
-      }
+  // listen for interval button press and start the interval
+  $('#interval-submit').on('click', function (ev) {
 
       if (videoWrapper.children().length < 1) {
         // if the video isn't enabled
@@ -260,16 +252,13 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
         return;
       }
 
-      if (value < 5) {
-        // if the number is less than 5
-        tip.html('interval must be greater than 5 seconds pls');
-        return;
-      }
-
       if (isIntervalRunning) {
         return;
       } else {
         // otherwise make an interval!
+
+        var value = parseInt(intervalSelect.val(), 10);
+
         isIntervalRunning = true;
 
         interval.fadeOut(500, function() {
@@ -278,11 +267,11 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
         countdownContainer.show().html(value).data('ms', value);
 
-        ticktock = window.setInterval(function() {
+        ticktock = window.setInterval(function () {
           countdown();
         }, 1000);
       }
-    }
+
   });
 
   chat.list.on('click', '.mute', function (ev) {
