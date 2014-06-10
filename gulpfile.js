@@ -20,25 +20,23 @@ var config = {
 
 gulp.task('styles', function () {
   return gulp.src(CSS_FILE_PATH + '*.css')
-    .pipe(concat('main.css'))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(concat('main.min.css'))
     .pipe(minifycss())
     .pipe(gulp.dest(CSS_FILE_PATH))
     .pipe(notify({ message: 'css task complete' }));
 });
 
-gulp.task('requirejs', function () {
+gulp.task('requirejs', function (cb) {
     return rjs.optimize(config);
 });
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['requirejs'], function () {
   return gulp.src([
       JS_FILE_PATH + 'lib/requirejs/require.js',
       JS_FILE_PATH + 'lib/jquery/jquery.js',
       JS_FILE_PATH + 'build/optimized.js'
     ])
-    .pipe(concat('facespaces.js'))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(concat('facespaces.min.js'))
     .pipe(uglify({ mangle: false }))
     .pipe(gulp.dest(JS_FILE_PATH + 'build/'))
     .pipe(notify({ message: 'js task complete' }));
@@ -55,7 +53,7 @@ gulp.task('jshint', function () {
     .pipe(notify({ message: 'jshint task complete' }));
 });
 
-gulp.task('tests', function () {
+gulp.task('tests', ['jshint'], function () {
   return gulp.src('tests/*.js')
     .pipe(nodeunit({
       reporter: 'junit',
@@ -65,4 +63,4 @@ gulp.task('tests', function () {
     }));
 });
 
-gulp.task('default', ['tests', 'jshint', 'styles', 'scripts', 'requirejs']);
+gulp.task('default', ['tests', 'styles', 'scripts']);
