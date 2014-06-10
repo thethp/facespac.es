@@ -10,14 +10,31 @@ block content
         ul(id='menu-list')
           li
             a#unmute(href='javascript:;') Unmute
+          li
+            a#interval(href='javascript:;') Interval
 
     #chat-container
       ul(id='chat-list')
       .end
 
     div(id='channel', data-channel='#{channel}')
+    div#interval-container.hidden
+      p interval!
+      label(for='interval-input') enter seconds:
+        select(id='interval-input')
+          option(value='10') 10
+          option(value='15') 15
+          option(value='20', selected='selected') 20
+          option(value='30') 30
+          option(value='60') 60
+          option(value='120') 120
+      button#interval-submit start
+
+      small.tip click the countdown timer to cancel interval
+
   #footer
     #video-wrapper
+    a#countdown(href='javascript:;')
     form(method='post', id='composer-form')
       .message-content
         input(name='message', id='composer-message', class='input', maxlength='100', autocomplete='off', placeholder='Send a message')

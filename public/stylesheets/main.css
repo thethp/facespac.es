@@ -444,6 +444,84 @@ ul li.on {
     width: 1px;
 }
 
+/***** Interval Styles~ *****/
+
+#countdown {
+    background-color: #fff;
+    bottom: 50px;
+    color: #222;
+    cursor: pointer;
+    display: none;
+    font-size: 44px;
+    font-weight: 600;
+    height: 50px;
+    left: 120px;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 80px;
+}
+
+#countdown:active {
+    background-color: #cc1465;
+    color: #fff;
+}
+
+#countdown:hover {
+    background-color: #ff008a;
+}
+
+#interval-container {
+    border: 7px solid #31dfff;
+    background: #fff;
+    color: #222;
+    font-size: 72px;
+    font-weight: 600;
+    height: 210px;
+    left: 50%;
+    margin-left: -180px;
+    position: fixed;
+    text-align: center;
+    top: 200px;
+    width: 360px;
+}
+
+#interval-container label {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#interval-container p {
+    margin-bottom: -45px;
+}
+
+#interval-input {
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+    width: 70px;
+}
+
+#interval-submit {
+    background: #1199B2;
+    border: 1px solid #31dfff;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 20px;
+    font-size: 14px;
+    margin: 5px auto;
+    display: block;
+}
+
+.tip {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+
 @media only screen and (max-width: 1207px) {
     #chat-container {
         width: 906px;

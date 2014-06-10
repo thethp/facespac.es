@@ -32,6 +32,12 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var videoWrapper = $('#video-wrapper');
   var userCount = $('.user-count');
   var currentDay = $('#current-day');
+  var interval = $('#interval-container');
+  var intervalSelect = $('#interval-input');
+  var isIntervalRunning = false;
+  var countdownContainer = $('#countdown');
+  var tip = $('.tip');
+  var ticktock; // interval function
   var channel = false;
   var isPosting = false;
   var canSend = true;
@@ -184,15 +190,89 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     );
   };
 
+  // count down the seconds in the countdown element
+  var countdown = function () {
+    var num =  parseInt(countdownContainer.html(), 10);
+
+    if (num > 0) {
+      countdownContainer.html(num - 1);
+    } else {
+      window.clearTimeout(ticktock);
+      intervalSubmit();
+    }
+  };
+
+  var intervalSubmit = function () {
+    composer.form.trigger('submit');
+    countdownContainer.html(countdownContainer.data('ms'));
+    ticktock = window.setInterval(function() {
+      countdown();
+    }, 1000);
+  };
+
+  var intervalStart = function () {
+    var value = parseInt(intervalSelect.val(), 10);
+
+    isIntervalRunning = true;
+
+    interval.fadeOut(500, function () {
+      tip.html('click the countdown timer to cancel interval');
+      interval.addClass('hidden').attr('style', '');
+    });
+
+    countdownContainer.show().html(value).data('ms', value);
+
+    ticktock = window.setInterval(function () {
+      countdown();
+    }, 1000);
+  }
+
   body.on('click', '#unmute', function (ev) {
     if (ev.target.id === 'unmute') {
       localStorage.removeItem('muted');
       mutes = [];
     }
   }).on('keydown', function (ev) {
+    if (ev.target.id === 'interval-input') {
+      return;
+    }
+    if (ev.keyCode === 27) {
+      interval.addClass('hidden');
+    }
     if (isFocusingKey(ev) && ev.target !== composer.message[0]) {
       composer.message.focus();
     }
+  });
+
+  // show/hide interval modal
+  menu.list.on('click', '#interval', function (ev) {
+    if (isIntervalRunning) {
+      interval.addClass('hidden');
+    } else {
+      interval.toggleClass('hidden');
+    }
+  });
+
+  // cancel interval
+  countdownContainer.on('click', function (ev) {
+    countdownContainer.html(0).data('ms', 0).hide();
+    isIntervalRunning = false;
+    window.clearTimeout(ticktock);
+  })
+
+  // listen for interval button press and start the interval
+  $('#interval-submit').on('click', function (ev) {
+    if (videoWrapper.children().length < 1) {
+      // if the video isn't enabled
+      tip.html('enable your camera first');
+      return;
+    }
+
+    if (isIntervalRunning) {
+      return;
+    }
+
+    intervalStart();
   });
 
   chat.list.on('click', '.mute', function (ev) {
