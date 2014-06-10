@@ -12,7 +12,6 @@
   },
   "scripts": {
     "build": "gulp",
-    "test": "gulp travis",
     "start": "nodemon app.js"
   },
   "dependencies": {
