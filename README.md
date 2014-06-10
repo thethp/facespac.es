@@ -5,5 +5,5 @@
     cp clients.json-dist clients.json
     npm install
     bower install
-    redis-server
+    redis-server &
     npm start
