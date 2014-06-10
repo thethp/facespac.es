@@ -4,7 +4,6 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var notify = require('gulp-notify');
 var concat = require('gulp-concat');
-var rename = require('gulp-rename');
 var nodeunit = require('gulp-nodeunit');
 var rjs = require('requirejs');
 
@@ -26,7 +25,7 @@ gulp.task('styles', function () {
     .pipe(notify({ message: 'css task complete' }));
 });
 
-gulp.task('requirejs', function (cb) {
+gulp.task('requirejs', function () {
     return rjs.optimize(config);
 });
 
