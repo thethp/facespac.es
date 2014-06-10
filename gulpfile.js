@@ -65,4 +65,4 @@ gulp.task('tests', function () {
     }));
 });
 
-gulp.task('default', ['tests', 'jshint', 'styles', 'requirejs', 'scripts']);
+gulp.task('default', ['tests', 'jshint', 'styles', 'scripts', 'requirejs']);
