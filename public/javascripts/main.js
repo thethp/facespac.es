@@ -191,7 +191,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   };
 
   // count down the seconds in the countdown element
-  var countdown = function() {
+  var countdown = function () {
     var num =  parseInt(countdownContainer.html(), 10);
 
     if (num > 0) {
@@ -202,8 +202,8 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     }
   };
 
-  var intervalSubmit = function() {
-    $('form').trigger('submit');
+  var intervalSubmit = function () {
+    composer.form.trigger('submit');
     countdownContainer.html(countdownContainer.data('ms'));
     ticktock = window.setInterval(function() {
       countdown();
@@ -228,7 +228,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   });
 
   // show/hide interval modal
-  menu.list.on('click', '#interval', function(ev) {
+  menu.list.on('click', '#interval', function (ev) {
     if (isIntervalRunning) {
       interval.hide();
     } else {
@@ -237,14 +237,14 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   });
 
   // cancel interval
-  countdownContainer.on('click', function(ev) {
+  countdownContainer.on('click', function (ev) {
     countdownContainer.html(0).data('ms', 0).hide();
     isIntervalRunning = false;
     window.clearTimeout(ticktock);
   })
 
   // listen for interval enter keypress and start the interval
-  interval.on('keypress', '#interval-input', function(ev) {
+  interval.on('keypress', '#interval-input', function (ev) {
     if (ev.keyCode == 13) {
       var value = parseInt(intervalInput.val(), 10);
 
