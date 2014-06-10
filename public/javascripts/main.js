@@ -210,6 +210,23 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     }, 1000);
   };
 
+  var intervalStart = function () {
+    var value = parseInt(intervalSelect.val(), 10);
+
+    isIntervalRunning = true;
+
+    interval.fadeOut(500, function () {
+      tip.html('click the countdown timer to cancel interval');
+      interval.addClass('hidden').attr('style', '');
+    });
+
+    countdownContainer.show().html(value).data('ms', value);
+
+    ticktock = window.setInterval(function () {
+      countdown();
+    }, 1000);
+  }
+
   body.on('click', '#unmute', function (ev) {
     if (ev.target.id === 'unmute') {
       localStorage.removeItem('muted');
@@ -245,32 +262,17 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
   // listen for interval button press and start the interval
   $('#interval-submit').on('click', function (ev) {
-      if (videoWrapper.children().length < 1) {
-        // if the video isn't enabled
-        tip.html('enable your camera first');
-        return;
-      }
+    if (videoWrapper.children().length < 1) {
+      // if the video isn't enabled
+      tip.html('enable your camera first');
+      return;
+    }
 
-      if (isIntervalRunning) {
-        return;
-      }
+    if (isIntervalRunning) {
+      return;
+    }
 
-      var value = parseInt(intervalSelect.val(), 10);
-
-      isIntervalRunning = true;
-
-      interval.fadeOut(500, function () {
-        tip.html('click the countdown timer to cancel interval');
-        interval.addClass('hidden').attr('style', '');
-      });
-
-      countdownContainer.show().html(value).data('ms', value);
-
-      ticktock = window.setInterval(function () {
-        countdown();
-      }, 1000);
-
-
+    intervalStart();
   });
 
   chat.list.on('click', '.mute', function (ev) {
