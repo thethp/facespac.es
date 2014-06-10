@@ -11,8 +11,8 @@
     "npm": "1.2.x"
   },
   "scripts": {
-    "build": "grunt",
-    "test": "grunt travis",
+    "build": "gulp",
+    "test": "gulp travis",
     "start": "nodemon app.js"
   },
   "dependencies": {
