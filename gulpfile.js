@@ -19,7 +19,7 @@ var config = {
 };
 
 gulp.task('styles', function () {
-  return gulp.src(CSS_FILE_PATH)
+  return gulp.src(CSS_FILE_PATH + '*.css')
     .pipe(concat('main.css'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(minifycss())
@@ -27,7 +27,7 @@ gulp.task('styles', function () {
     .pipe(notify({ message: 'css task complete' }));
 });
 
-gulp.task('requirejs', function() {
+gulp.task('requirejs', function () {
     return rjs.optimize(config);
 });
 
@@ -39,7 +39,7 @@ gulp.task('scripts', function () {
     ])
     .pipe(concat('facespaces.js'))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(uglify())
+    .pipe(uglify({ mangle: false }))
     .pipe(gulp.dest(JS_FILE_PATH + 'build/'))
     .pipe(notify({ message: 'js task complete' }));
 });
@@ -65,4 +65,4 @@ gulp.task('tests', function () {
     }));
 });
 
-gulp.task('default', ['tests', 'jshint', 'styles', 'scripts', 'requirejs']);
+gulp.task('default', ['tests', 'jshint', 'styles', 'requirejs', 'scripts']);

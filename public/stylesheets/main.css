@@ -476,14 +476,14 @@ ul li.on {
     border: 7px solid #31dfff;
     background: #fff;
     color: #222;
-    font-size: 72px;
+    font-size: 60px;
     font-weight: 600;
     height: 210px;
     left: 50%;
     margin-left: -180px;
     position: fixed;
     text-align: center;
-    top: 200px;
+    top: 50px;
     width: 360px;
 }
 

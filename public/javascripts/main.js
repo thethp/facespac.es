@@ -205,7 +205,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var intervalSubmit = function () {
     composer.form.trigger('submit');
     countdownContainer.html(countdownContainer.data('ms'));
-    ticktock = window.setInterval(function() {
+    ticktock = window.setInterval(function () {
       countdown();
     }, 1000);
   };
@@ -225,7 +225,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     ticktock = window.setInterval(function () {
       countdown();
     }, 1000);
-  }
+  };
 
   body.on('click', '#unmute', function (ev) {
     if (ev.target.id === 'unmute') {
@@ -258,7 +258,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
     countdownContainer.html(0).data('ms', 0).hide();
     isIntervalRunning = false;
     window.clearTimeout(ticktock);
-  })
+  });
 
   // listen for interval button press and start the interval
   $('#interval-submit').on('click', function (ev) {
