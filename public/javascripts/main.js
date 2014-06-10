@@ -245,7 +245,6 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
   // listen for interval button press and start the interval
   $('#interval-submit').on('click', function (ev) {
-
       if (videoWrapper.children().length < 1) {
         // if the video isn't enabled
         tip.html('enable your camera first');
@@ -254,24 +253,23 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
       if (isIntervalRunning) {
         return;
-      } else {
-        // otherwise make an interval!
-
-        var value = parseInt(intervalSelect.val(), 10);
-
-        isIntervalRunning = true;
-
-        interval.fadeOut(500, function () {
-          tip.html('click the countdown timer to cancel interval');
-          interval.addClass('hidden').attr('style', '');
-        });
-
-        countdownContainer.show().html(value).data('ms', value);
-
-        ticktock = window.setInterval(function () {
-          countdown();
-        }, 1000);
       }
+
+      var value = parseInt(intervalSelect.val(), 10);
+
+      isIntervalRunning = true;
+
+      interval.fadeOut(500, function () {
+        tip.html('click the countdown timer to cancel interval');
+        interval.addClass('hidden').attr('style', '');
+      });
+
+      countdownContainer.show().html(value).data('ms', value);
+
+      ticktock = window.setInterval(function () {
+        countdown();
+      }, 1000);
+
 
   });
 
