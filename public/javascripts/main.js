@@ -220,7 +220,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
       return;
     }
     if (ev.keyCode === 27) {
-      interval.hide();
+      interval.addClass('hidden');
     }
     if (isFocusingKey(ev) && ev.target !== composer.message[0]) {
       composer.message.focus();
@@ -230,9 +230,9 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   // show/hide interval modal
   menu.list.on('click', '#interval', function (ev) {
     if (isIntervalRunning) {
-      interval.hide();
+      interval.addClass('hidden');
     } else {
-      interval.toggle();
+      interval.toggleClass('hidden');
     }
   });
 
@@ -261,8 +261,9 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
         isIntervalRunning = true;
 
-        interval.fadeOut(500, function() {
+        interval.fadeOut(500, function () {
           tip.html('click the countdown timer to cancel interval');
+          interval.addClass('hidden').attr('style', '');
         });
 
         countdownContainer.show().html(value).data('ms', value);
