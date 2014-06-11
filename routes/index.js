@@ -164,8 +164,6 @@ module.exports = function (app, nconf, io) {
         }
       });
 
-      console.dir(Object.keys(io.sockets.manager.roomClients[socket.id]));
-
       socket.join(data.channel);
       emitChannelCount(data.channel);
       if (!disconnectHandlers[data.channel]) {
