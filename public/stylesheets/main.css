@@ -446,7 +446,7 @@ ul li.on {
 
 /***** Interval Styles~ *****/
 
-#countdown {
+#interval-countdown {
     background-color: #fff;
     bottom: 50px;
     color: #222;
@@ -463,12 +463,12 @@ ul li.on {
     width: 80px;
 }
 
-#countdown:active {
+#interval-countdown:active {
     background-color: #cc1465;
     color: #fff;
 }
 
-#countdown:hover {
+#interval-countdown:hover {
     background-color: #ff008a;
 }
 

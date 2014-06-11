@@ -14,11 +14,12 @@ var config = {
   baseUrl: JS_FILE_PATH,
   mainConfigFile: JS_FILE_PATH + 'config.js',
   out: JS_FILE_PATH + 'build/optimized.js',
-  name: 'config'
+  name: 'config',
+  optimize: 'none' // don't minify with requirejs, we'll do that later
 };
 
 gulp.task('styles', function () {
-  return gulp.src(CSS_FILE_PATH + '*.css')
+  return gulp.src(CSS_FILE_PATH + 'main.css')
     .pipe(concat('main.min.css'))
     .pipe(minifycss())
     .pipe(gulp.dest(CSS_FILE_PATH))
@@ -32,7 +33,6 @@ gulp.task('requirejs', function () {
 gulp.task('scripts', ['requirejs'], function () {
   return gulp.src([
       JS_FILE_PATH + 'lib/requirejs/require.js',
-      JS_FILE_PATH + 'lib/jquery/jquery.js',
       JS_FILE_PATH + 'build/optimized.js'
     ])
     .pipe(concat('facespaces.min.js'))

@@ -35,7 +35,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
   var interval = $('#interval-container');
   var intervalSelect = $('#interval-input');
   var isIntervalRunning = false;
-  var countdownContainer = $('#countdown');
+  var countdownContainer = $('#interval-countdown');
   var tip = $('.tip');
   var ticktock; // interval function
   var channel = false;
@@ -192,7 +192,7 @@ define(['jquery', 'gumhelper', './base/transform', './base/videoShooter', 'finge
 
   // count down the seconds in the countdown element
   var countdown = function () {
-    var num =  parseInt(countdownContainer.html(), 10);
+    var num = parseInt(countdownContainer.html(), 10);
 
     if (num > 0) {
       countdownContainer.html(num - 1);
