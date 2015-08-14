@@ -90,7 +90,7 @@ valid = {
     '<a href="mailto:email+advancedtricky@example.com" target="_blank">email+advancedtricky@example.com</a>',
     '<a href="http://example.com/#fragment" target="_blank">http://example.com/#fragment</a>',
     '<a href="https://twitter.com/search?q=%23fragment&src=hash" target="_blank">#fragment</a>',
-    '<a href="http://facespac.es/c/facespaces" target="_blank">/c/facespaces</a>'
+    '<a href="http://thebe.st/c/facespaces" target="_blank">/c/the best</a>'
   ]
 };
 

@@ -141,7 +141,7 @@ define([], function() {
           return null;
         }
 
-        return match[1] + template('http://facespac.es/c/' + channel, match[2]);
+        return match[1] + template('http://thebe.st/c/' + channel, match[2]);
       }
     }
   };
